@@ -70,7 +70,26 @@ class CppRenamer implements vscode.Disposable {
 				this.codeModel.renameFile(oldFilepath, newFilepath);
 
 				// TODO: Rename correspond header file
-				if (CodeModel.isSourceFile(oldFilepath)) return;
+				if (CodeModel.isSourceFile(oldFilepath)) {
+					const srcPathNoExt = oldFilepath.slice(0, -1 * path.extname(oldFilepath).length);
+					const findMask = vscode.workspace.asRelativePath(`${srcPathNoExt}.*`);
+					vscode.workspace.findFiles(findMask).then(files => {
+						if (files.length === 0)
+							return;
+
+						let edit = new vscode.WorkspaceEdit();
+						for (const file of files) {
+							if (file.fsPath == newFilepath) continue;
+
+							const hdrExt = path.extname(file.fsPath);
+							const newSrcPathNoExt = newFilepath.slice(0, -1 * path.extname(newFilepath).length);
+							const newUri = vscode.Uri.parse(newSrcPathNoExt + hdrExt);
+							edit.renameFile(file, newUri);
+						}
+						vscode.workspace.applyEdit(edit);
+					});
+					return;
+				}
 
 				if (path.dirname(oldFilepath) != path.dirname(newFilepath))
 					return; // TODO: Implement move files

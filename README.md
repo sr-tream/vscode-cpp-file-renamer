@@ -15,4 +15,4 @@ Limitations:
 - [ ] ~~parse all files in workspace to find includes~~ recursive extract and parse includes from source files;
 - [ ] fix bug with parallel reload `compile_commands.json` and rename includes;
 - [ ] use own instance of tree-sitter for background editing;
-- [ ] rename correspond header file, when rename source file (and fix includes).
+- [x] rename correspond header file, when rename source file (and fix includes).
