@@ -1,7 +1,9 @@
 {
   "name": "vscode-cpp-file-renamer",
   "displayName": "vscode-cpp-file-renamer",
-  "description": "Watch file renaming and fix inxlude files",
+  "description": "Watch file renaming and fix include files",
+  "repository": "https://github.com/sr-tream/vscode-cpp-file-renamer",
+  "publisher": "sr-team",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.88.0"
@@ -10,7 +12,17 @@
     "Other"
   ],
   "activationEvents": [
-    "*"
+        "onLanguage:c",
+        "onLanguage:cpp",
+        "onLanguage:cuda-cpp",
+        "onLanguage:objective-c",
+        "onLanguage:objective-cpp",
+        "workspaceContains:CMakeLists.txt",
+        "workspaceContains:*/CMakeLists.txt",
+        "workspaceContains:*/*/CMakeLists.txt",
+        "workspaceContains:*/*/*/CMakeLists.txt",
+        "workspaceContains:compile_commands.json",
+        "workspaceContains:build/compile_commands.json"
   ],
   "main": "./out/extension.js",
   "contributes": {
