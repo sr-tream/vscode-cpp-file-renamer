@@ -16,7 +16,7 @@ export namespace CodeModel {
 
     const SourceFiles = ['c', 'C', 'cc', 'CC', 'cl', 'clcpp', 'cp', 'cu', 'ccm', 'cpp', 'CPP', 'c++', 'C++', 'cxx', 'CXX', 'c++m', 'cppm', 'cxxm', 'hlsl', 'm', 'M', 'mm'];
     export function isSourceFile(fileName: string): boolean {
-        return SourceFiles.indexOf(path.extname(fileName)) >= 0;
+        return SourceFiles.indexOf(path.extname(fileName).slice(1)) >= 0;
     }
 
     export class CodeModel implements vscode.Disposable {
